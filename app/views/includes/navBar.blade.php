@@ -1,68 +1,54 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="{{route('home')}}">CWC 2015</a>
-    </div>
-    <!-- /.navbar-header -->
-
-    <ul class="nav navbar-top-links navbar-right">
-        {{--<li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+<!-- Navbar ================================================== -->
+        <div id="logoArea" class="navbar" style="line-height:82px;">
+            <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar" >
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </a>
-
-        </li>--}}
-
-
-
-        @if(!Auth::check())
-            <li>
-                <a href="{{route('login')}}">Login</a>
-            </li>
-
-        @endif
-
-
-        @if(Auth::check())
-
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php $user = Auth::user(); ?>
-                    @if($user != null)
-                    {{$user->name}}
-                    @else
-                    {{'+You'}}
-                    @endif
-                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li>
-                        <a href="{{route('user.profile.show')}}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            <div class="navbar-inner">
+                <a class="brand" href="index-2.html"><img  style="max-width:51%;position: relative;left: 27px;"src="themes/images/logo4.png" alt="Bootsshop"/></a>
+                <form class="form-inline navbar-search" method="post" action="http://www.bootstrappage.com/view/bootstrapshop/products.html" >
+                    <input id="srchFld" class="srchTxt" type="text" />
+                    <select class="srchTxt">
+                        <option>All</option>
+                        <option>CLOTHES </option>
+                        <option>FOOD AND BEVERAGES </option>
+                        <option>HEALTH & BEAUTY </option>
+                        <option>SPORTS & LEISURE </option>
+                        <option>BOOKS & ENTERTAINMENTS </option>
+                    </select>
+                    <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+                </form>
+                <ul id="topMenu" class="nav pull-right" style="margin-top: 14px;">
+                    <li class=""><a href="special_offer.html">Specials Offer</a></li>
+                    <li class=""><a href="normal.html">Delivery</a></li>
+                    <li class=""><a href="contact.html">Contact</a></li>
+                    <li class="">
+                        <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                        <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3>Login Block</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal loginFrm">
+                                    <div class="control-group">
+                                        <input type="text" id="inputEmail" placeholder="Email">
+                                    </div>
+                                    <div class="control-group">
+                                        <input type="password" id="inputPassword" placeholder="Password">
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="checkbox">
+                                            <input type="checkbox"> Remember me
+                                        </label>
+                                    </div>
+                                </form>
+                                <button type="submit" class="btn btn-success">Sign in</button>
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                            </div>
+                        </div>
                     </li>
-                    {{--<li>
-                        <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>--}}
-                    <li class="divider"></li>
-
-                        <li>
-                            <a href="{{route('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-
-
-
                 </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-        @endif
-    </ul>
-    <!-- /.navbar-top-links -->
-
-
-</nav>
+            </div>
+        </div>

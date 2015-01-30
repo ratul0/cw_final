@@ -11,18 +11,17 @@
 
     <title>{{$title or 'Admin'}} - {{Config::get('customConfig.siteName')}}</title>
 
-    <!-- Bootstrap Core CSS -->
-    {{HTML::style('css/bootstrap.min.css')}}
 
+    {{HTML::style('themes/bootshop/bootstrap.min.css')}}
 
-    <!-- MetisMenu CSS -->
-    {{HTML::style('css/metisMenu.min.css')}}
+    {{HTML::style('themes/css/base.css')}}
 
-    <!-- Custom CSS -->
-    {{HTML::style('css/sb-admin-2.css')}}
+    {{HTML::style('themes/css/bootstrap-responsive.min.css')}}
 
-    <!-- Custom Fonts -->
-    {{HTML::style('css/font-awesome.min.css')}}
+    {{HTML::style('themes/css/font-awesome.css')}}
+
+    {{HTML::style('themes/js/google-code-prettify/prettify.css')}}
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

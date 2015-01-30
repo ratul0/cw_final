@@ -1,30 +1,33 @@
 @include('includes.header')
-
-    <body>
-
-    <div id="wrapper">
-        @include('includes.navBar')
-        @include('includes.sideBar')
-            <!-- Page Content -->
-            <div id="page-wrapper">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-12">
-
-                                @yield('content')
-                            </div>
-                            <!-- /.col-lg-12 -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
-                </div>
-                <!-- /#page-wrapper -->
+<body>
+<div id="header">
+    <div class="container">
+    @include('includes.navBar')
+        
     </div>
-    <!-- /#wrapper -->
-    @include('includes.footer')
+</div>
+<!-- Header End====================================================================== -->
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+            @include('includes.sideBar')
+
+            <div class="span9">
+                <ul class="breadcrumb">
+                    <li><a href="index-2.html">Home</a> <span class="divider">/</span></li>
+                    <li class="active">Registration</li>
+                </ul>
+                    @yield('content')
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MainBody End ============================= -->
+@include('includes.footer')
 
 
-    </body>
+</body>
 
 </html>
+
+
