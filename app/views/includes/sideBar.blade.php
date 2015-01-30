@@ -7,7 +7,7 @@
                         <li class="subMenu"><a> {{$category->name}}</a>
                             <ul style="display:none">
                                 @foreach($category->sub_categories as $sub_category)
-                                <li><a href="products.html"><i class="icon-chevron-right"></i>{{$sub_category->name}}</a></li>
+                                <li><a href="{{route('products.subcategory.show',['id'=>$sub_category->id])}}"><i class="icon-chevron-right"></i>{{$sub_category->name}}</a></li>
                                 @endforeach
                             </ul>
                         </li>

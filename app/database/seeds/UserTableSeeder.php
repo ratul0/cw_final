@@ -12,19 +12,19 @@ class UserTableSeeder extends Seeder {
 		$users = [
 					[
 
-								'email'      => 'seller@cw.com',
+								'email'      => 's@s.com',
 								'full_name' =>  'Abu Shariar Ratul',
-								'mobile'    =>  '+8801683501282',
-								'password'   => Hash::make('seller'),
+								'mobile'    =>  '01683501282',
+								'password'   => Hash::make('b'),
 								'created_at' => date('Y-m-d H:i:s'),
 								'updated_at' => date('Y-m-d H:i:s')
 					],
 					[
 
-								'email'      => 'buyer@cw.com',
+								'email'      => 'b@b.com',
 								'full_name' =>  'Don Saimon ',
-								'mobile'    =>  '+8801683506582',
-								'password'   => Hash::make('buyer'),
+								'mobile'    =>  '01683506582',
+								'password'   => Hash::make('b'),
 								'created_at' => date('Y-m-d H:i:s'),
 								'updated_at' => date('Y-m-d H:i:s')
 					]

@@ -33,17 +33,20 @@ Route::group(['before'=>'auth'],function(){
 
 	/*UserController*/
 
-	Route::get('user/profile',['as'=> 'user.profile.show','uses'=>'UserController@profile']);
+	Route::get('profile',['as'=> 'user.profile.show','uses'=>'UserController@profile']);
 	Route::get('user/profile/update',['as'=> 'user.profile.update','uses'=>'UserController@profileUpdate']);
-	Route::put('user/profile',['as'=> 'user.doProfile','uses'=>'UserController@doProfile']);
+	Route::put('user/profile',['as'=> 'user.updateProfile','uses'=>'UserController@updateProfile']);
 
 
 	/*UserController*/
 
 
-	Route::get('products/categories/{id}',['as'=> 'categories.show','uses'=>'ProductsController@profile']);
-	Route::get('products/subcategories/{id}',['as'=> 'categories.show','uses'=>'ProductsController@profile']);
-	Route::get('products/{id}',['as'=> 'categories.show','uses'=>'ProductsController@profile']);
+
+
+	Route::get('products', array('as' => 'products.index', 'uses' => 'ProductsController@index'));
+	Route::get('product/{id}',['as'=> 'product.show','uses'=>'ProductsController@singleProduct']);
+	Route::get('products/category/{id}',['as'=> 'products.category.show','uses'=>'ProductsController@singleCategoryProduct']);
+	Route::get('products/subcategory/{id}',['as'=> 'products.subcategory.show','uses'=>'ProductsController@singleSubCategoryProduct']);
 
 
 
@@ -53,7 +56,14 @@ Route::group(['before'=>'auth'],function(){
 
 Route::group(['before'=> 'seller'],function(){
 
-	Route::resource('products', 'ProductsController');
+
+	Route::get('products/create', array('as' => 'products.create', 'uses' => 'ProductsController@create'));
+	Route::post('products/create', array('as' => 'products.store', 'uses' => 'ProductsController@store'));
+	Route::get('products/edit/{id}', array('as' => 'products.edit', 'uses' => 'ProductsController@edit'));
+	Route::put('products/edit/{id}', array('as' => 'products.update', 'uses' => 'ProductsController@update'));
+	Route::delete('products/{id}', array('as' => 'products.delete', 'uses' => 'ProductsController@deleteSubject'));
+
+
 	Route::get('products/category/subcategory',['as'=> 'products.category.subcategory','uses'=>'ProductsController@getSubCategories']);
 	Route::get('products/category/subcategory/fields',['as'=> 'products.category.subcategory.fields','uses'=>'ProductsController@getFields']);
 });

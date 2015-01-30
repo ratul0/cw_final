@@ -144,4 +144,37 @@ class ProductsController extends \BaseController {
 		return View::make('ajax.afterSubCategorySelect')->with('fields',$fields);
 
 	}
+
+
+	public function singleProduct($id){
+		try{
+			$product = Product::findOrFail($id);
+
+			return View::make('products.singleShow', compact('product'));
+		}catch (Exception $e){
+			return Redirect::route('products.index')->with('error','Requested Page not exists.');
+		}
+	}
+
+
+	public function singleCategoryProduct($id){
+		try{
+			$products = Product::where('category_id',$id)->get();
+			return $products;
+			return View::make('products.singleShow', compact('product'));
+		}catch (Exception $e){
+			return Redirect::route('products.index')->with('error','Requested Page not exists.');
+		}
+	}
+
+	public function singleSubCategoryProduct($id){
+		try{
+			$products = Product::where('sub_category_id',$id)->get();
+			return $products;
+			return View::make('products.singleShow', compact('product'));
+		}catch (Exception $e){
+			return Redirect::route('products.index')->with('error','Requested Page not exists.');
+		}
+	}
+
 }
