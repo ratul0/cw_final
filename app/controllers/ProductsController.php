@@ -41,10 +41,12 @@ class ProductsController extends \BaseController {
 
 
 		$validator = Validator::make($data = Input::all(), Product::rules());
+
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
+
 		$product = new Product;
 		$product->name = $data['name'];
 		$product->description = $data['description'];
@@ -55,6 +57,13 @@ class ProductsController extends \BaseController {
 		$product->sub_category_id = $data['sub_category_id'];
 		$getKeys = SubCategoryMeta::where('sub_category_id',$data['sub_category_id'])->get(['key']);
 
+
+
+
+
+
+
+
 		if($product->save()){
 			foreach($getKeys as $key){
 				$infoProduct = new InfoProduct;
@@ -64,13 +73,60 @@ class ProductsController extends \BaseController {
 				$infoProduct->sub_category_id = $data['sub_category_id'];
 				$infoProduct->save();
 			}
+			if($data['image1'] != null && $data['image2'] != null && $data['image3'] != null)
+			{
+				for($i = 1 ; $i <= 3; $i++){
+					$file = Input::file('image'.$i);
+					$imageName = $file->getClientOriginalName();
+					$imageRelativePath = 'images/'.$product->id.'/';
+					$imagePath = public_path($imageRelativePath);
+					File::exists($imagePath) or File::makeDirectory($imagePath);
+					$image = Image::make($file->getRealPath());
+					$path = 'image'.$i.'.'.$file->getClientOriginalExtension();
+					if($image->resize(160,160)->save($imagePath.$path))
+					{
+						$product_image = new ProductImages;
+						$product_image->product_id = $product->id;
+						$product_image->image_url = $imageRelativePath.$path;
+						$product_image->save();
+					}
+				}
 
+
+				/*$file = Input::file('image2');
+				$imageName = $file->getClientOriginalName();
+				$imageRelativePath = 'images/'.$data['product_id'].'/';
+				$imagePath = public_path($imageRelativePath);
+				File::exists($imagePath) or File::makeDirectory($imagePath);
+				$image = Image::make($file->getRealPath());
+				$path = 'image2.'.$file->getClientOriginalExtension();
+				if($image->resize(160,160)->save($imagePath.$path)){
+					$product_image = new ProductImages;
+					$product_image->product_id = $data['product_id'];
+					$product_image->image_url = $imageRelativePath.$path;
+					$product_image->save();
+				}
+
+				$file = Input::file('image3');
+				$imageName = $file->getClientOriginalName();
+				$imageRelativePath = 'images/'.$data['product_id'].'/';
+				$imagePath = public_path($imageRelativePath);
+				File::exists($imagePath) or File::makeDirectory($imagePath);
+				$image = Image::make($file->getRealPath());
+				$path = 'image3.'.$file->getClientOriginalExtension();
+				if($image->resize(160,160)->save($imagePath.$path)){
+					$product_image = new ProductImages;
+					$product_image->product_id = $data['product_id'];
+					$product_image->image_url = $imageRelativePath.$path;
+					$product_image->save();
+				}*/
+				//return ;
+			}
 			return Redirect::route('products.index');
 		}else{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 	}
-
 	/**
 	 * Display the specified product.
 	 *
@@ -160,9 +216,8 @@ class ProductsController extends \BaseController {
 
 	public function singleCategoryProduct($id){
 		try{
-			$products = Product::where('category_id',$id)->get();
-			return $products;
-			return View::make('products.singleShow', compact('product'));
+			$products = Product::where('category_id',$id)->paginate(15);
+			return View::make('products.index', compact('products'));
 		}catch (Exception $e){
 			return Redirect::route('products.index')->with('error','Requested Page not exists.');
 		}
@@ -170,9 +225,8 @@ class ProductsController extends \BaseController {
 
 	public function singleSubCategoryProduct($id){
 		try{
-			$products = Product::where('sub_category_id',$id)->get();
-			return $products;
-			return View::make('products.singleShow', compact('product'));
+			$products = Product::where('sub_category_id',$id)->paginate(15);
+			return View::make('products.index', compact('products'));
 		}catch (Exception $e){
 			return Redirect::route('products.index')->with('error','Requested Page not exists.');
 		}

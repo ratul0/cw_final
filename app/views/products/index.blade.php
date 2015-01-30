@@ -51,7 +51,7 @@
 				@foreach($products as $product)
 				<div class="row">	  
 					<div class="span2">
-						<img src="themes/images/products/4.jpg" alt=""/>
+						<img src="{{asset(ProductImages::where('product_id',$product->id)->first()->image_url)}}" alt=""/>
 					</div>
 					<div class="span4">
 						<h3>{{$product->name}}</h3>				
@@ -89,7 +89,7 @@
 					@foreach($products as $product)
         			<li class="span3">
 					  <div class="thumbnail">
-						<a href="{{route('product.show',$product->id)}}"><img src="themes/images/products/10.jpg" alt=""/></a>
+						<a href="{{route('product.show',$product->id)}}"><img src="{{asset(ProductImages::where('product_id',$product->id)->first()->image_url)}}" alt=""/></a>
 						<div class="caption">
 						  <h5>{{$product->name}}</h5>
 						  <p> 

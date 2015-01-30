@@ -85,7 +85,7 @@ Route::group(['before'=> 'buyer'],function(){
 Route::get('/test', function()
 {
 
-	return CustomHelper::getAllCategories();
+	return ProductImages::where('product_id',1)->first()->image_url;
 	//return SubCategory::with('category')->whereCategoryId(2)->get();
 	//return Category::lists('name','id');
 

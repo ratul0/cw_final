@@ -11,8 +11,10 @@ class Product extends \Eloquent {
 					[
 								'name' => 'required',
 								'price'=>'required|numeric',
-								'quantity'=>'required|numeric'
-
+								'quantity'=>'required|numeric',
+								'image1' => 'required',
+								'image2' => 'required',
+								'image3' => 'required'
 
 
 					],

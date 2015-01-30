@@ -2,7 +2,7 @@
 
 @section('content')
     @include('includes.alert')
-    {{Form::open(['route'=>'products.store', 'method'=> 'post','role'=>'form'])}}
+    {{Form::open(['route'=>'products.store', 'method'=> 'post','role'=>'form', 'files' => true])}}
     <fieldset>
 
 
@@ -31,6 +31,7 @@
             {{ Form::textarea('description', '', array('class' => 'form-control', 'placeholder' => 'Product Description')) }}
         </div>
 
+
         <div class="form-group">
 
             {{Form::label('category_id','Product Category',['class'=>'control-label'])}}
@@ -50,6 +51,22 @@
         <div id="fields">
 
         </div>
+        <div class="form-group">
+
+            {{Form::label('image1','Image #1',['class'=>'control-label'])}}
+            {{ Form::file('image1', '', array('class' => 'form-control')) }}
+        </div>
+        <div class="form-group">
+
+            {{Form::label('image2','Image #2',['class'=>'control-label'])}}
+            {{ Form::file('image2', '', array('class' => 'form-control')) }}
+        </div>
+        <div class="form-group">
+
+            {{Form::label('image3','Image #3',['class'=>'control-label'])}}
+            {{ Form::file('image3', '', array('class' => 'form-control')) }}
+        </div>
+
 
 
 

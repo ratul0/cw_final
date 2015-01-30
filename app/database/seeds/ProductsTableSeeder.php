@@ -34,6 +34,15 @@ class ProductsTableSeeder extends Seeder {
 				$infoProduct->sub_category_id = $product->sub_category_id;
 				$infoProduct->save();
 			}
+			foreach(range(1,3) as $testindex){
+				$product_images = new ProductImages;
+				$product_images->product_id = $product->id;
+				$product_images->image_url = 'images/none.jpg';
+				$product_images->save();
+			}
+
+
+
 
 		}
 	}
