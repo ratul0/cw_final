@@ -41,6 +41,12 @@ Route::group(['before'=>'auth'],function(){
 	/*UserController*/
 
 
+	Route::get('products/categories/{id}',['as'=> 'categories.show','uses'=>'ProductsController@profile']);
+	Route::get('products/subcategories/{id}',['as'=> 'categories.show','uses'=>'ProductsController@profile']);
+	Route::get('products/{id}',['as'=> 'categories.show','uses'=>'ProductsController@profile']);
+
+
+
 });
 
 
@@ -48,6 +54,8 @@ Route::group(['before'=>'auth'],function(){
 Route::group(['before'=> 'seller'],function(){
 
 	Route::resource('products', 'ProductsController');
+	Route::get('products/category/subcategory',['as'=> 'products.category.subcategory','uses'=>'ProductsController@getSubCategories']);
+	Route::get('products/category/subcategory/fields',['as'=> 'products.category.subcategory.fields','uses'=>'ProductsController@getFields']);
 });
 
 

@@ -21,6 +21,9 @@ class ProductsController extends \BaseController {
 	 */
 	public function create()
 	{
+
+
+
 		return View::make('products.create')
 					->with('category',Category::lists('name','id'));
 	}
@@ -46,10 +49,21 @@ class ProductsController extends \BaseController {
 		$product->description = $data['description'];
 		$product->price = $data['price'];
 		$product->quantity = $data['quantity'];
-		$product->user_id = $data['user_id'];
+		$product->user_id = Auth::user()->id;
 		$product->category_id = $data['category_id'];
 		$product->sub_category_id = $data['sub_category_id'];
+		$getKeys = SubCategoryMeta::where('sub_category_id',$data['sub_category_id'])->get(['key']);
+
 		if($product->save()){
+			foreach($getKeys as $key){
+				$infoProduct = new InfoProduct;
+				$infoProduct->key = $key->key;
+				$infoProduct->value = $data[$key->key];
+				$infoProduct->product_id = $product->id;
+				$infoProduct->sub_category_id = $data['sub_category_id'];
+				$infoProduct->save();
+			}
+
 			return Redirect::route('products.index');
 		}else{
 			return Redirect::back()->withErrors($validator)->withInput();
@@ -116,5 +130,18 @@ class ProductsController extends \BaseController {
 
 		return Redirect::route('products.index');
 	}
+	public function getSubCategories(){
+		//return Input::get('id');
+		$subCategories = SubCategory::whereCategoryId(Input::get('id'))->get();
 
+		return View::make('ajax.afterCategorySelect')->with('subCategories',$subCategories);
+
+	}
+	public function getFields(){
+		//return Input::get('id');
+		$fields = SubCategoryMeta::where('sub_category_id',Input::get('id'))->get();
+
+		return View::make('ajax.afterSubCategorySelect')->with('fields',$fields);
+
+	}
 }

@@ -34,7 +34,21 @@
         <div class="form-group">
 
             {{Form::label('category_id','Product Category',['class'=>'control-label'])}}
-            {{ Form::select('category_id', $category, array('class' => 'form-control')) }}
+            <select class="form-control" name="category_id" id="category_id">
+                <option value="0">Select Category</option>
+                @foreach($category as $key => $value)
+                    <option value="{{$key}}">{{$value}}</option>
+                @endforeach
+            </select>
+            {{--{{ Form::select('category_id', $category, array('class' => 'form-control','id' => 'category_id')) }}--}}
+        </div>
+        <div class="form-group">
+
+            {{Form::label('sub_category_id','Product SubCategory',['class'=>'control-label'])}}
+            {{ Form::select('sub_category_id' ,[], array('class' => 'form-control','id' => 'sub_category_id')) }}
+        </div>
+        <div id="fields">
+
         </div>
 
 
@@ -43,7 +57,7 @@
 
 
         <!-- Change this to a button or input when using this as a form -->
-        {{Form::submit('Add Product',['class'=> 'btn'])}}
+        {{Form::submit('Add Product',['class'=> 'btn','id'=>'submit'])}}
 
     </fieldset>
     {{Form::close()}}
@@ -51,21 +65,47 @@
 
 @stop
 
-@section('style')
-    {{ HTML::style('css/chosen_dropdown/chosen.css') }}
-
-@stop
 
 @section('script')
-    {{ HTML::script('js/chosen_dropdown/chosen.jquery.min.js') }}
-    {{ HTML::script('js/chosen_dropdown/chosen.proto.min.js') }}
 
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $(".multi_dropdown").chosen();
 
+            $('#category_id').change(function(){
+                var cat_id = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url:"{{route('products.category.subcategory')}}",
+                    data: { id: cat_id},
+                    success:function(msg){
+                        //console.log(msg);
+                        $('#sub_category_id').html(msg);
+                        $('#fields').html('');
 
+                        //alert(msg);
+                    },
+                    error:function(msg){
+                        console.log(msg);
+                    }
+                });
+            });
+            $('#sub_category_id').change(function(){
+                var sub_cat_id = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url:"{{route('products.category.subcategory.fields')}}",
+                    data: { id: sub_cat_id},
+                    success:function(msg){
+                        console.log(msg);
+                        $('#fields').html(msg);
+                        //alert(msg);
+                    },
+                    error:function(msg){
+                        console.log(msg);
+                    }
+                });
+            });
         });
     </script>
 @stop

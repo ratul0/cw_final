@@ -20,4 +20,8 @@ class Product extends \Eloquent {
 		);
 	}
 
+	public function infoProducts(){
+		return $this->hasMany('InfoProduct','product_id','id');
+	}
+
 }
