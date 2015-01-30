@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
             </a>
             <div class="navbar-inner">
-                <a class="brand" href="{{route('login')}}"><img  style="max-width:51%;position: relative;left: 27px;"src="themes/images/logo4.png" alt="Bootsshop"/></a>
+                <a class="brand" href="{{route('login')}}"><img  style="max-width:51%;position: relative;left: 27px;"src="{{ URL::asset('themes/images/logo4.png') }}" alt="Bootsshop"/></a>
                 <form class="form-inline navbar-search" method="post" action="http://www.bootstrappage.com/view/bootstrapshop/products.html" >
                     <input id="srchFld" class="srchTxt" type="text" />
                     <select class="srchTxt">

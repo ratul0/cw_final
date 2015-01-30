@@ -45,4 +45,4 @@
 {{HTML::script('themes/js/google-code-prettify/prettify.js')}}
 {{HTML::script('themes/js/bootshop.js')}}
 {{HTML::script('themes/js/jquery.lightbox-0.5.js')}}
-
+@yield('script')

@@ -21,7 +21,7 @@
     {{HTML::style('themes/css/font-awesome.css')}}
 
     {{HTML::style('themes/js/google-code-prettify/prettify.css')}}
-
+    @yield('style')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

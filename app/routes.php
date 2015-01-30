@@ -47,7 +47,7 @@ Route::group(['before'=>'auth'],function(){
 
 Route::group(['before'=> 'seller'],function(){
 
-
+	Route::resource('products', 'ProductsController');
 });
 
 
@@ -66,6 +66,8 @@ Route::group(['before'=> 'buyer'],function(){
 
 Route::get('/test', function()
 {
+
+	return CustomHelper::getAllCategories();
 	//return SubCategory::with('category')->whereCategoryId(2)->get();
 	//return Category::lists('name','id');
 

@@ -2,6 +2,7 @@
 
 @section('content')
     @include('includes.alert')
-	This is Dashboard.
-    <a href="{{route('products.create')}}">Add Product</a>
+    @foreach($products as $product)
+        {{$product->name}}
+    @endforeach
 @stop
