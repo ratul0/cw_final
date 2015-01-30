@@ -9,7 +9,8 @@ class ProductsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$products = Product::all();
+		$products = Product::paginate(15);
+		//return ($products->links());
 
 		return View::make('products.index', compact('products'));
 	}
