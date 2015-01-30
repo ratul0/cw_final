@@ -62,7 +62,8 @@ class AuthController extends \BaseController {
 
 	public function doRegister(){
 		$rules = [
-					'name'                  => 'required|alpha_num',
+					'full_name'                  => 'required|alpha_num',
+					'mobile'             =>      'required|regex:/^01[0-9]{9}/',
 					'email'                 => 'required|email|unique:users',
 					'password'              => 'required|confirmed',
 					'password_confirmation' => 'required'
@@ -77,11 +78,16 @@ class AuthController extends \BaseController {
 		}else{
 
 			$user = new User();
-			$user->name = $data['name'];
+			$user->full_name = $data['full_name'];
+			$user->mobile = $data['mobile'];
+
 			$user->email = $data['email'];
 			$user->password = Hash::make($data['password']);
 
+			$role = Role::find($data['user_type']);
+
 			if($user->save()){
+				$user->attachRole($role);
 				return Redirect::route('login')
 							->with('success',"Account Created Successfully.Login Now.");
 			}else{

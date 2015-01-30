@@ -7,22 +7,21 @@ class EntrustTableSeeder extends Seeder {
 
 	public function run()
 	{
-		$admin = Role::find(1);
-		$user = Role::find(2);
+		$buyer = Role::find(1);
+		$seller = Role::find(2);
 
-		$create_user = Permission::find(2);
+		$view_product = Permission::find(1);
 
-		$admin->attachPermission($create_user);
+		$buyer->attachPermission($view_product);
+		$seller->attachPermission($view_product);
 
 		$user1 = User::find(1);
 		$user2 = User::find(2);
-		$user3 = User::find(3);
 
-		$user1->attachRole($admin);
-		$user2->attachRole($admin);
-		$user3->attachRole($user);
+		$user1->attachRole($seller);
+		$user2->attachRole($buyer);
 
-		for($i=4;$i<=50;$i++){
+		for($i=4;$i<=20;$i++){
 			$user_ids[] = $i;
 		}
 
@@ -30,7 +29,7 @@ class EntrustTableSeeder extends Seeder {
 		$userfaker = User::whereIn('id',$user_ids)->get();
 
 		foreach($userfaker as $userf){
-			$userf->attachRole($user);
+			$userf->attachRole($buyer);
 
 		}
 

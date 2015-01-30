@@ -11,23 +11,20 @@ class UserTableSeeder extends Seeder {
 
 		$users = [
 					[
-								'name'       => 'admin',
-								'email'      => 'admin@cw.com',
-								'password'   => Hash::make('admin'),
+
+								'email'      => 'seller@cw.com',
+								'full_name' =>  'Abu Shariar Ratul',
+								'mobile'    =>  '+8801683501282',
+								'password'   => Hash::make('seller'),
 								'created_at' => date('Y-m-d H:i:s'),
 								'updated_at' => date('Y-m-d H:i:s')
 					],
 					[
-								'name'       => 'yousuf',
-								'email'      => 'yousuf@cw.com',
-								'password'   => Hash::make('yousuf'),
-								'created_at' => date('Y-m-d H:i:s'),
-								'updated_at' => date('Y-m-d H:i:s')
-					],
-					[
-								'name'       => 'user',
-								'email'      => 'user@cw.com',
-								'password'   => Hash::make('user'),
+
+								'email'      => 'buyer@cw.com',
+								'full_name' =>  'Don Saimon ',
+								'mobile'    =>  '+8801683506582',
+								'password'   => Hash::make('buyer'),
 								'created_at' => date('Y-m-d H:i:s'),
 								'updated_at' => date('Y-m-d H:i:s')
 					]
@@ -36,10 +33,12 @@ class UserTableSeeder extends Seeder {
 
 		DB::table('users')->insert($users);
 
-		foreach(range(4, 50) as $index)
+		foreach(range(3, 20) as $index)
 		{
 			User::create([
-						'name' => $faker->userName,
+
+						'full_name' =>  $faker->firstName. $faker->lastName,
+						'mobile'    =>  $faker->phoneNumber,
 						'email' => $faker->email,
 						'password' 	=> Hash::make('u'),
 						'created_at' => date('Y-m-d H:i:s'),

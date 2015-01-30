@@ -85,3 +85,22 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+Route::filter('seller', function()
+{
+	if (! Entrust::hasRole(Config::get('globalRole.seller'))   ) // Checks the current user
+	{
+		return Redirect::to('/');
+
+	}
+});
+
+Route::filter('buyer', function()
+{
+	if (! Entrust::hasRole(Config::get('globalRole.buyer'))   ) // Checks the current user
+	{
+		return Redirect::to('/');
+
+	}
+});
+

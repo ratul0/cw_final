@@ -9,8 +9,8 @@ class PermissionsTableSeeder extends Seeder {
 	{
 		$permissions =
 					[
-								'view_user'   => 'View User',
-								'create_user' => 'Create User'
+								'view_product'   => 'View Product'
+
 					];
 
 

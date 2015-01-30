@@ -43,6 +43,19 @@ Route::group(['before'=>'auth'],function(){
 
 });
 
+
+
+Route::group(['before'=> 'seller'],function(){
+
+
+});
+
+
+Route::group(['before'=> 'buyer'],function(){
+
+
+});
+
 /*
 |--------------------------------------------------------------------------
 | Test Routes
@@ -53,14 +66,16 @@ Route::group(['before'=>'auth'],function(){
 
 Route::get('/test', function()
 {
+	//return SubCategory::with('category')->whereCategoryId(2)->get();
+	//return Category::lists('name','id');
 
-	$data = ['name' => 'test'];
+	/*$data = ['name' => 'test'];
 
 	Mail::send('emails.welcome', $data, function($message)
 	{
 
 		$message->to('ratulcse27@gmail.com')->subject('Welcome!');
-	});
+	});*/
 
 
 });
