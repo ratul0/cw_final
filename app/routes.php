@@ -45,8 +45,8 @@ Route::group(['before'=>'auth'],function(){
 
 	Route::get('products', array('as' => 'products.index', 'uses' => 'ProductsController@index'));
 	Route::get('product/{id}',['as'=> 'product.show','uses'=>'ProductsController@singleProduct']);
-	Route::get('products/category/{id}',['as'=> 'products.category.show','uses'=>'ProductsController@singleCategoryProduct']);
-	Route::get('products/subcategory/{id}',['as'=> 'products.subcategory.show','uses'=>'ProductsController@singleSubCategoryProduct']);
+	Route::get('product/category/{id}',['as'=> 'products.category.show','uses'=>'ProductsController@singleCategoryProduct']);
+	Route::get('product/subcategory/{id}',['as'=> 'products.subcategory.show','uses'=>'ProductsController@singleSubCategoryProduct']);
 
 
 
