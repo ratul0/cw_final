@@ -1,43 +1,38 @@
-@include('includes.header')
+@extends('layouts.default')
 
-<body>
-    <div class="container">
+@section('content')
+    @include('includes.alert')
 
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
+    {{Form::open(['route'=>'doLogin', 'method'=> 'post','role'=>'form'])}}
+    <div class="control-group">
+        <label class="control-label" for="inputEmail1">Email</label>
 
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
-                    </div>
-                    @include('includes.alert')
+        <div class="controls">
 
-                    <div class="panel-body">
-                            {{Form::open(['route'=>'doLogin', 'method'=> 'post','role'=>'form'])}}
-                            <fieldset>
-                                <div class="form-group">
-                                    {{Form::email('email',null,['class'=>'form-control','placeholder'=>'E-mail','autofocus'])}}
-                                </div>
-                                <div class="form-group">
-                                    {{Form::password('password',['class'=>'form-control','placeholder'=>'Password'])}}
-                                </div>
-
-                                <!-- Change this to a button or input when using this as a form -->
-                                {{Form::submit('Login',['class'=> 'btn btn-lg btn-success btn-block'])}}
-                            </fieldset>
-                        {{Form::close()}}
-                    </div>
-
-                    <div id="tabs" data-tabs="tabs">
-                        <p class="text-center"><a href="{{route('register')}}">Need an Account?</a></p>
-                    </div>
-                </div>
-            </div>
+            {{Form::email('email',null,['class'=>'span3','placeholder'=>'E-mail'])}}
         </div>
     </div>
-    @include('includes.footer')
+    <div class="control-group">
+        <label class="control-label" for="inputPassword1">Password</label>
+
+        <div class="controls">
+
+            {{Form::password('password',['class'=>'span3','placeholder'=>'Password'])}}
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            {{Form::submit('Login',['class'=> 'btn'])}}
+
+        </div>
+    </div>
+
+    {{Form::close()}}
+    <div id="tabs" data-tabs="tabs">
+        <p class="text-center"><a class="btn" href="{{route('register')}}">Need an Account?</a></p>
+    </div>
+@stop
 
 
-</body>
 
-</html>
+

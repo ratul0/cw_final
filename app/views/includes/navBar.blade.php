@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
             </a>
             <div class="navbar-inner">
-                <a class="brand" href="index-2.html"><img  style="max-width:51%;position: relative;left: 27px;"src="themes/images/logo4.png" alt="Bootsshop"/></a>
+                <a class="brand" href="{{route('login')}}"><img  style="max-width:51%;position: relative;left: 27px;"src="themes/images/logo4.png" alt="Bootsshop"/></a>
                 <form class="form-inline navbar-search" method="post" action="http://www.bootstrappage.com/view/bootstrapshop/products.html" >
                     <input id="srchFld" class="srchTxt" type="text" />
                     <select class="srchTxt">
@@ -23,32 +23,18 @@
                     <li class=""><a href="special_offer.html">Specials Offer</a></li>
                     <li class=""><a href="normal.html">Delivery</a></li>
                     <li class=""><a href="contact.html">Contact</a></li>
-                    <li class="">
-                        <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                        <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h3>Login Block</h3>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal loginFrm">
-                                    <div class="control-group">
-                                        <input type="text" id="inputEmail" placeholder="Email">
-                                    </div>
-                                    <div class="control-group">
-                                        <input type="password" id="inputPassword" placeholder="Password">
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="checkbox">
-                                            <input type="checkbox"> Remember me
-                                        </label>
-                                    </div>
-                                </form>
-                                <button type="submit" class="btn btn-success">Sign in</button>
-                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                            </div>
-                        </div>
-                    </li>
+                    @if(!Auth::check())
+                        <li class="">
+                            <a href="{{ route('login') }}" role="button" ><span class="btn btn-large btn-success">Login</span></a>
+                        </li>
+                    @endif
+
+                    @if(Auth::check())
+                        <li class="">
+                            <a href="{{ route('logout') }}" role="button" ><span class="btn btn-large btn-danger">Logout</span></a>
+                        </li>
+                    @endif
+
                 </ul>
             </div>
         </div>
