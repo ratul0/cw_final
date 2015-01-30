@@ -63,8 +63,8 @@ class AuthController extends \BaseController {
 	public function doRegister(){
 		$rules = [
 					'full_name'                  => 'required|alpha_num',
-					'mobile'             =>      'required|regex:/^01[0-9]{9}/',
-					'email'                 => 'required|email|unique:users',
+					'mobile'             =>      'required|regex:/^01[0-9]{9}/|unique:users,mobile',
+					'email'                 => 'required|email|unique:users,email',
 					'password'              => 'required|confirmed',
 					'password_confirmation' => 'required'
 		];
