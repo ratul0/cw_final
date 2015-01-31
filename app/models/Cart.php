@@ -10,7 +10,7 @@ class Cart extends \Eloquent {
 	public static function rules($id=0,$merge=[] ){
 		return array_merge(
 					[
-								'quantity' => 'required|numeric'
+								'quantity' => 'required|numeric|min:1'
 
 
 					],

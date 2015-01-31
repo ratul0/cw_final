@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration {
 			$table->integer('buyer_id')->unsigned();
 			$table->text('shipping_details');
 			$table->integer('shipping_status')->default(0);
-			$table->integer('order_status')->default(0);
+
 			$table->double('total_price');
 			$table->integer('rating_status')->default(0);
 

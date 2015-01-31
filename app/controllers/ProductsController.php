@@ -238,4 +238,11 @@ class ProductsController extends \BaseController {
 		}
 	}
 
+	public function sellerProfileView($id){
+
+		$products = Product::where('user_id',$id)->get();
+		return Redirect::route('products.index')
+					->with('products',$products);
+	}
+
 }

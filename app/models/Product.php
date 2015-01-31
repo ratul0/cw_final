@@ -10,11 +10,14 @@ class Product extends \Eloquent {
 		return array_merge(
 					[
 								'name' => 'required',
-								'price'=>'required|numeric',
-								'quantity'=>'required|numeric',
+								'price'=>'required|numeric|min:1',
+								'quantity'=>'required|numeric|min:1',
 								'image1' => 'required',
 								'image2' => 'required',
-								'image3' => 'required'
+								'image3' => 'required',
+								'category_id'=>'required|numeric|min:1',
+								'sub_category_id'=>'required|numeric|min:1'
+
 
 
 					],
