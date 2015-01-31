@@ -10,7 +10,11 @@ class OrderController extends \BaseController {
 	 */
 	public function view()
 	{
-		$orders = Order::where('buyer_id', Auth::user()->id)->get();
+		$orders = DB::table('order_items')
+					->join('orders','orders.id','=','order_items.order_id')
+					->where('buyer_id',Auth::user()->id)
+					->get();
+
 
 		return View::make('order.buyer')
 					->with('title','Order')->with('orders', $orders);
@@ -39,7 +43,7 @@ class OrderController extends \BaseController {
 		$cart_delete = Cart::where('user_id', Auth::user()->id)->get()->lists('id');
 		$order = new Order;
 		$order->buyer_id= Auth::user()->id;
-		$order->order_status=0;
+
 		$order->rating_status=0;
 		$total = 0;
 		foreach($carts as $cart){
@@ -54,6 +58,7 @@ class OrderController extends \BaseController {
 				$order_items = new OrderItems;
 				$order_items->order_id= $order->id;
 				$order_items->product_id = $cart->product_id;
+				$order_items->order_status=0;
 				$order_items->quantity = $cart->quantity;
 				$order_items->item_price = $cart->price;
 				$order_items->save();
@@ -67,7 +72,7 @@ class OrderController extends \BaseController {
 					$update->quantity = $update->quantity-$product_minus->quantity;
 					$update->save();
 				}
-				return View::make('order.buyer')->with('orders',Order::Where('buyer_id',Auth::user()->id)->get());
+				return Redirect::route('order.view');
 			};
 		}else{
 			return Redirect::route('products.index');
@@ -123,5 +128,34 @@ class OrderController extends \BaseController {
 	{
 		//
 	}
+	public  function getOrderForSeller(){
+		 $orders = DB::table('orders')
+					->join('order_items','order_items.id','=','orders.id')
+					->join('products','products.id','=','order_items.product_id')
+					->where('user_id',Auth::user()->id)
+					->select('order_items.id','buyer_id','total_price','name','description','price','order_items.created_at','order_items.quantity','order_status')
+					->get();
+		return View::make('order.seller')
+					->with('orders',$orders);
+	}
 
+
+	public function cancel($id){
+		if(OrderItems::find($id)->delete()){
+			return Redirect::route('order.show');
+		}else{
+			return Redirect::back()->with('error',"Something Went Wrong.");
+		}
+
+	}
+
+	public function approve($id){
+		$approve = OrderItems::find($id);
+		$approve->order_status = 1;
+		if($approve->save()){
+			return Redirect::route('order.show');
+		}else{
+			return Redirect::back()->with('error',"Something Went Wrong.");
+		}
+	}
 }

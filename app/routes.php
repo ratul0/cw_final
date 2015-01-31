@@ -62,7 +62,11 @@ Route::group(['before'=> 'seller'],function(){
 	Route::get('products/edit/{id}', array('as' => 'products.edit', 'uses' => 'ProductsController@edit'));
 	Route::put('products/edit/{id}', array('as' => 'products.update', 'uses' => 'ProductsController@update'));
 	Route::delete('products/{id}', array('as' => 'products.delete', 'uses' => 'ProductsController@deleteSubject'));
-	Route::get('order/show',['as'=> 'order.show','uses'=>'ProductsController@getSubCategories']);
+	Route::get('order/show',['as'=> 'order.show','uses'=>'OrderController@getOrderForSeller']);
+
+
+	Route::get('order/approve/{id}',['as'=> 'order.approve','uses'=>'OrderController@approve']);
+	Route::get('order/cancel/{id}',['as'=> 'order.cancel','uses'=>'OrderController@cancel']);
 
 
 	Route::get('products/category/subcategory',['as'=> 'products.category.subcategory','uses'=>'ProductsController@getSubCategories']);
@@ -80,6 +84,9 @@ Route::group(['before'=> 'buyer'],function(){
 	Route::get('wishlist/add/{id}',['as'=> 'wishlist.add','uses'=>'WishlistController@add']);
 	Route::get('wishlist/view',['as'=> 'wishlist.view','uses'=>'WishlistController@view']);
 
+
+	Route::get('seller/profile/{id}',['as'=> 'seller.profile','uses'=>'ProductsController@sellerProfileView']);
+
 });
 
 /*
@@ -93,17 +100,6 @@ Route::group(['before'=> 'buyer'],function(){
 Route::get('/test', function()
 {
 
-	return var_dump(WishList::where('product_id',2)->where('user_id',Auth::user()->id)->first());
-	//return SubCategory::with('category')->whereCategoryId(2)->get();
-	//return Category::lists('name','id');
-
-	/*$data = ['name' => 'test'];
-
-	Mail::send('emails.welcome', $data, function($message)
-	{
-
-		$message->to('ratulcse27@gmail.com')->subject('Welcome!');
-	});*/
 
 
 });
