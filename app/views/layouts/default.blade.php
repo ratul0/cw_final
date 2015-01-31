@@ -13,7 +13,7 @@
             @include('includes.sideBar')
 
             <div class="span9">
-                
+
                     @yield('content')
             </div>
         </div>

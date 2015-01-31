@@ -9,7 +9,7 @@ class ProductsTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
-		foreach(range(1, 20) as $index)
+		foreach(range(1, 50) as $index)
 		{
 			$cat = $faker->numberBetween(1,5);
 			$subcat = SubCategory::where('category_id', $cat)->get(['id']);
