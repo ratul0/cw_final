@@ -3,11 +3,25 @@
 @section('content')
     @include('includes.alert')
 
-    <div class="row">{{$user->full_name}}</div>
-    <div class="row">{{$user->mobile}}</div>
-    <div class="row">{{$user->email}}</div>
-    <div class="row">{{$user->location}}</div>
-    <div class="row">{{$user->updated_at->diffForHumans()}}</div>
+    <fieldset>
+
+        <div class="form-group">
+        	<b>Full Name:</b>  {{$user->full_name}}
+        </div>
+
+        <div class="form-group">
+        	<b>Email:</b>  {{$user->email}}
+        </div>
+
+        <div class="form-group">
+        	<b>Mobile:</b>  {{$user->mobile}}
+        </div>
+
+        <div class="form-group">
+        	<b>Last Updated at:</b>  {{$user->updated_at->diffForHumans()}}
+        </div>
+
+    </fieldset>
 
     <a class="btn btn-default" href="{{route('user.profile.update')}}">Profile Update</a>
 

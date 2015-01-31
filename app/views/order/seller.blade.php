@@ -63,13 +63,18 @@
                     {{$order->created_at}}
                 </td>
 
+                <td>
+                    @if(!$order->order_status)
+                    <a class= "btn btn-large btn-danger" href="{{route('order.cancel',['id'=>$order->id])}}">Cancel</a>
+                    @endif
+                </td>
 
-                @if(!$order->order_status)
-                <td><a class= "btn btn-large btn-danger" href="{{route('order.cancel',['id'=>$order->id])}}">Cancel</a> </td>
+                <td>
+                    @if(!$order->order_status)
+                        <a class= "btn btn-large btn-success" href="{{route('order.approve',['id'=>$order->id])}}">Approve</a>
+                    @endif
+                </td>
 
-
-                <td><a class= "btn btn-large btn-success" href="{{route('order.approve',['id'=>$order->id])}}">Approve</a> </td>
-                @endif
 
 
 

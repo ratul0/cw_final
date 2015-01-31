@@ -1,18 +1,25 @@
-@include('includes.header')
+@extends('layouts.default')
 
-@include('includes.navBar')
-<div class="container">
-    <div class="row">
-       <h2 align=center> Code Warriors Challange 2015 Web Track (PHP) </h2></br>
-       <h3 align=center> Sample User <a href="{{route('login')}}">Login</a>/<a href="{{route('register')}}">Register</a> Web App </h3></br>
-	   
+@section('content')
+    @include('includes.alert')
+   	<h4>Latest Products </h4>
+   	<ul class="thumbnails">
 
-    </div>
-</div>
+   				@foreach($latest_products as $latest_product)
+				<li class="span3">
+                                  <div class="thumbnail">
+                                    <a href="{{route('product.show',$latest_product->id)}}"><img src="{{asset(ProductImages::where('product_id',$latest_product->id)->first()->image_url)}}" alt=""/></a>
+                                    <div class="caption">
+                                      <h5>{{$latest_product->name}}</h5>
+                                      <p> 
+                                        {{Str::limit($latest_product->description, 50) }}
 
-@include('includes.footer')
-
-
-</body>
-
-</html>
+                                      </p>
+                                      <h4 style="text-align:center"> <a class="btn" href="{{route('product.show',$latest_product->id)}}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{$latest_product->price}}/=</a></h4>
+                                    </div>
+                                  </div>
+                                </li>
+                 @endforeach
+				
+			  </ul>
+@stop

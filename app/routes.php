@@ -3,11 +3,12 @@
 
 
 Route::get('/',['as'=> 'home','uses'=> function(){
-	return View::make('home');
+	$products = Product::orderBy('id', 'DESC')->take(9)->skip(0)->get();
+	return View::make('home')->with('latest_products',$products);
 }]);
 
-
-
+/*SearchController */
+Route::post('searchProduct',['as'=> 'productsearch.show','uses'=>'SearchController@result']);
 
 /*before Login*/
 Route::group(['before'=>'guest'],function(){
@@ -39,7 +40,6 @@ Route::group(['before'=>'auth'],function(){
 
 
 	/*UserController*/
-
 
 
 

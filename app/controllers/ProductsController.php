@@ -210,10 +210,14 @@ class ProductsController extends \BaseController {
 
 			$product_info = InfoProduct::where('product_id',$product->id)->get();
 
+			//Get the relavent Products
+			$relavent_products = Product::where('category_id',$product->category_id)->get();
+
 			return View::make('products.singleShow')
 						->with('product',$product)
 						->with('image_urls',$image_urls)
-						->with('product_info',$product_info);
+						->with('product_info',$product_info)
+						->with('relavent_products',$relavent_products);
 		}catch (Exception $e){
 			return Redirect::route('products.index')->with('error','Requested Page not exists.');
 		}
@@ -240,9 +244,12 @@ class ProductsController extends \BaseController {
 
 	public function sellerProfileView($id){
 
-		$products = Product::where('user_id',$id)->get();
-		return Redirect::route('products.index')
-					->with('products',$products);
+		$products = Product::where('user_id',$id)->paginate(15);
+		return View::make('products.sellerProfile')
+					->with('products',$products)
+					->with('user',User::find($id)->full_name);
 	}
+
+
 
 }
