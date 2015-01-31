@@ -206,8 +206,14 @@ class ProductsController extends \BaseController {
 	public function singleProduct($id){
 		try{
 			$product = Product::findOrFail($id);
+			$image_urls = ProductImages::where('product_id',$product->id)->get();
 
-			return View::make('products.singleShow', compact('product'));
+			$product_info = InfoProduct::where('product_id',$product->id)->get();
+
+			return View::make('products.singleShow')
+						->with('product',$product)
+						->with('image_urls',$image_urls)
+						->with('product_info',$product_info);
 		}catch (Exception $e){
 			return Redirect::route('products.index')->with('error','Requested Page not exists.');
 		}

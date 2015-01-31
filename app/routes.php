@@ -62,6 +62,7 @@ Route::group(['before'=> 'seller'],function(){
 	Route::get('products/edit/{id}', array('as' => 'products.edit', 'uses' => 'ProductsController@edit'));
 	Route::put('products/edit/{id}', array('as' => 'products.update', 'uses' => 'ProductsController@update'));
 	Route::delete('products/{id}', array('as' => 'products.delete', 'uses' => 'ProductsController@deleteSubject'));
+	Route::get('order/show',['as'=> 'order.show','uses'=>'ProductsController@getSubCategories']);
 
 
 	Route::get('products/category/subcategory',['as'=> 'products.category.subcategory','uses'=>'ProductsController@getSubCategories']);
@@ -70,7 +71,14 @@ Route::group(['before'=> 'seller'],function(){
 
 
 Route::group(['before'=> 'buyer'],function(){
+	Route::get('cart',['as'=> 'cart.show','uses'=>'CartController@index']);
+	Route::post('addtocart',['as'=> 'cart.doAdd','uses'=>'CartController@store']);
 
+	Route::get('order/view',['as'=> 'order.view','uses'=>'OrderController@view']);
+	Route::get('order/store',['as'=> 'order.store','uses'=>'OrderController@store']);
+
+	Route::get('wishlist/add/{id}',['as'=> 'wishlist.add','uses'=>'WishlistController@add']);
+	Route::get('wishlist/view',['as'=> 'wishlist.view','uses'=>'WishlistController@view']);
 
 });
 
@@ -85,7 +93,7 @@ Route::group(['before'=> 'buyer'],function(){
 Route::get('/test', function()
 {
 
-	return ProductImages::where('product_id',1)->first()->image_url;
+	return var_dump(WishList::where('product_id',2)->where('user_id',Auth::user()->id)->first());
 	//return SubCategory::with('category')->whereCategoryId(2)->get();
 	//return Category::lists('name','id');
 

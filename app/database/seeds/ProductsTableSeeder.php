@@ -19,8 +19,8 @@ class ProductsTableSeeder extends Seeder {
 				'user_id' => 1,
 				'name' => $faker->name,
 				'description' => $faker->text,
-				'price' => $faker->numberBetween(10,2300000),
-				'quantity' =>  $faker->numberBetween(10,100),
+				'price' => $faker->numberBetween(10,200),
+				'quantity' =>  $faker->numberBetween(10,20),
 				'category_id' => $cat,
 				'sub_category_id' => $subcat[$id-1]['id']
 				

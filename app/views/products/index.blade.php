@@ -59,7 +59,6 @@
 						<p>
 						{{Str::limit($product->description, 100) }}
 						</p>
-						<a class="btn btn-small pull-right" href="{{route('product.show',$product->id)}}">View Details</a>
 						<br class="clr"/>
 					</div>
 					<div class="span3 alignR">
@@ -67,7 +66,7 @@
 							<h3>{{$product->price}}/=</h3>
 							
 							<div class="btn-group">
-							  <a href="product_details.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+							  <a href="{{route('product.show',$product->id)}}" class="btn btn-large btn-primary"> View Details </a>
 							</div>
 						</form>
 					</div>
@@ -96,7 +95,7 @@
 							{{Str::limit($product->description, 50) }}
 
 						  </p>
-						  <h4 style="text-align:center"> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{$product->price}}/=</a></h4>
+						  <h4 style="text-align:center"> <a class="btn" href="{{route('product.show',$product->id)}}">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">{{$product->price}}/=</a></h4>
 						</div>
 					  </div>
 					</li>
